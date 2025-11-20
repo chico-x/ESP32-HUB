@@ -1,0 +1,133 @@
+:root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --text: #c9d1d9;
+    --accent: #58a6ff;
+    --border: #30363d;
+    --success: #238636;
+    --danger: #da3633;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 20px;
+}
+
+.container { max-width: 900px; margin: 0 auto; } /* Wider for 2 cols */
+
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.brand { font-size: 1.5em; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px rgba(88, 166, 255, 0.3); }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* --- APP GRID LAYOUT --- */
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .app-grid { grid-template-columns: 1fr; }
+}
+
+/* APP ITEM CARDS */
+.file-item {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stack info and buttons */
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.file-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border-color: var(--accent);
+}
+
+.file-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.file-meta {
+    font-size: 0.75em;
+    color: #8b949e;
+    margin-top: -8px;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.actions button, .actions a {
+    flex-grow: 1; /* Stretch buttons */
+}
+
+/* Buttons */
+.btn { padding: 8px 12px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; transition: all 0.2s; font-size: 0.9em; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary { background: var(--success); color: white; border: none; }
+.btn-danger { background: var(--danger); color: white; border: none; }
+.btn-outline { border: 1px solid var(--accent); color: var(--accent); display: inline-block; text-align: center; }
+
+/* DROP ZONE */
+.drop-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 30px; text-align: center; transition: all 0.2s; background: #0d1117; margin-top: 15px; }
+.drop-zone.highlight { border-color: var(--accent); background: #1c2128; }
+
+/* STORAGE BAR */
+#storage-box {
+    background: #0d1117;
+    padding: 15px;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    font-family: monospace;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat-val { color: var(--accent); font-weight: bold; }
+
+/* --- AESTHETIC TERMINAL --- */
+#terminal {
+    height: 350px;
+    background: #0a0a0a; /* Darker black */
+    padding: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Hide scrollbars but keep functionality */
+#terminal::-webkit-scrollbar { width: 8px; }
+#terminal::-webkit-scrollbar-track { background: #000; }
+#terminal::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+.hidden { display: none !important; }
+
+/* EDITOR MODAL */
+#editorModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.editor-content { background: var(--card-bg); width: 90%; max-width: 800px; height: 80%; border: 1px solid var(--accent); border-radius: 6px; display: flex; flex-direction: column; padding: 15px; box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
+.editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: bold; }
+#codeArea { flex-grow: 1; background: #0d1117; color: #e6edf3; border: 1px solid var(--border); border-radius: 4px; padding: 10px; font-family: 'Courier New', monospace; font-size: 14px; resize: none; outline: none; }

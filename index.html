@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">ESP32 <span class="accent">HUB</span></div>
+            <button onclick="stopProgram('ALL')" class="btn btn-danger">EMERGENCY STOP</button>
+        </header>
+        <main>
+            <!-- STORAGE & UPLOAD -->
+            <div class="card">
+                <h3>System Storage</h3>
+                <div id="storage-box">
+                    <span>Total: <span id="total-space" class="stat-val">...</span> KB</span>
+                    <span>Used: <span id="used-space" class="stat-val" style="color:#da3633">...</span> KB</span>
+                    <span>Free: <span id="free-space" class="stat-val" style="color:#238636">...</span> KB</span>
+                </div>
+                
+                <div class="drop-zone" id="dropZone">
+                    <p style="margin:0; font-size:1.1em; font-weight:bold; color:#fff">Drag & Drop Files</p>
+                    <div style="display:flex; justify-content:center; gap:10px; margin-top:15px;">
+                        <div>
+                            <input type="file" id="fileInput" hidden onchange="handleFileSelect(this.files)">
+                            <label for="fileInput" class="btn btn-outline">📄 Upload File</label>
+                        </div>
+                        <div>
+                            <input type="file" id="folderInput" hidden webkitdirectory directory onchange="handleFileSelect(this.files)">
+                            <label for="folderInput" class="btn btn-outline">📂 Upload Website</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="progressContainer" class="hidden">
+                    <div class="progress-bar"><div id="progressFill" class="fill"></div></div>
+                    <small id="uploadStatus" style="color:#aaa">Uploading...</small>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN LAYOUT -->
+            <div class="app-grid">
+                <!-- COL 1: APPS -->
+                <div class="card">
+                    <h3>Python Apps</h3>
+                    <div id="appList">Loading...</div>
+                </div>
+
+                <!-- COL 2: WEBSITES -->
+                <div class="card">
+                    <h3>Websites</h3>
+                    <div id="webList">Loading...</div>
+                </div>
+            </div>
+
+            <!-- TERMINAL -->
+            <div class="card terminal-card">
+                <div class="term-header">
+                    <h3>Terminal</h3>
+                    <span id="term-status" style="font-size:0.8em; color:#238636">● Live</span>
+                </div>
+                <div id="terminal"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- EDITOR -->
+    <div id="editorModal" class="hidden">
+        <div class="editor-content">
+            <div class="editor-header">
+                <span id="editFileName">editing.py</span>
+                <div>
+                    <button onclick="saveFile()" class="btn btn-primary btn-small">Save</button>
+                    <button onclick="closeEditor()" class="btn btn-danger btn-small">Close</button>
+                </div>
+            </div>
+            <textarea id="codeArea" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <div id="toast" class="hidden">Action Successful</div>
+    <script src="app.js"></script>
+</body>
+</html>
