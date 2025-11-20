@@ -5,8 +5,8 @@ import network
 import server
 
 # --- CONFIGURATION ---
-SSID = "CS-Students"
-PASSWORD = "csstudents01"
+SSID = "your SSID"   #replace this line with your wifi ssid
+PASSWORD = "your password" #replace this line with your wifi password
 # ---------------------
 
 class LEDController:
@@ -50,7 +50,7 @@ async def connection_manager():
     print("WiFi Failed. Starting Hotspot...")
     sta.active(False)
     ap.active(True)
-    ap.config(essid='ESP32-Recovery', password='password123')
+    ap.config(essid='ESP32-offline', password='password123')
     print("Hotspot active:", ap.ifconfig()[0])
 
 async def main():
